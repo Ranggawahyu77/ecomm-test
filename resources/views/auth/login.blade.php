@@ -1,6 +1,6 @@
-@section('title', 'Login')
+@extends('layouts.guest')
 
-  @extends('layouts.guest')
+@section('title', 'Login')
   @section('content')
     <div class="container">
       <div class="row vh-100 align-items-center justify-content-center">
@@ -61,4 +61,4 @@
           </div>
         </div>
     </div>
-  @endsection
+@endsection
