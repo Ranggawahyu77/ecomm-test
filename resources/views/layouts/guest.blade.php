@@ -12,6 +12,7 @@
   <body>
 
     <div class="font-sans">
+      {{-- Isi Konten --}}
       @yield('content')
     </div>
     

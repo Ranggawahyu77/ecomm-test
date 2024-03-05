@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+  // tampilan register
   public function index()
   {
     return view('auth.register');
   }
 
-
+  // store to database
   public function store(Request $request)
   {
     $data = $request->validate([

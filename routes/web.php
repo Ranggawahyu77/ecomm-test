@@ -21,6 +21,7 @@ Route::get('/', function () {
   return view('welcome');
 });
 
+//Halaman Login
 Route::get('/login', [LoginController::class, "index"])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, "authenticate"]);
 Route::post('/logout', [LoginController::class, "logout"]);
@@ -34,10 +35,12 @@ Route::middleware('auth')->group(function () {
   Route::get('/dashboard', [HomeController::class, "index"])->name("home");
   Route::get('/dashboard/product/{id}', [HomeController::class, "show"])->name("product");
 
+  //Halaman Keranjang
   Route::get('/cart', [CartController::class, "index"])->name('cart');
   Route::post('/cart', [CartController::class, "addCart"])->name("add-cart");
   Route::delete('/cart/{id}', [CartController::class, "destroy"])->name("remove-cart");
 
+  //Proses Check Out
   Route::post('/checkout/{id}', [CartController::class, "proces"])->name('checkout-proces');
   Route::get('/checkout/{id}', [CartController::class, "checkout"])->name('checkout');
   Route::get('/checkout/success/{id}', [CartController::class, "success"])->name('checkout-succes');

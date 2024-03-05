@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Success')
 @section('container')
+
   <div class="d-flex justify-content-center">
     <div class="card">
       <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
@@ -10,4 +11,5 @@
       </div>
     </div>
   </div>
+  
 @endsection

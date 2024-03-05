@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Checkout')
 @section('container')
+
   <div class="d-flex justify-content-center">
     <div class="card">
       <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
@@ -12,9 +13,12 @@
       </div>
     </div>
   </div>
+
 @endsection
 
 @section('scripts')
+
+  {{-- script pembayaran midtrans --}}
   <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
   <script type="text/javascript">
     document.getElementById('pay-button').onclick = function(){
@@ -36,4 +40,5 @@
       });
     };
   </script>
+
 @endsection

@@ -17,6 +17,7 @@
     @yield('container')
   </div>
   
+  {{-- jika ada javascript tambahan --}}
   @yield('scripts')
 
   {{-- Bootstrap 5 --}}

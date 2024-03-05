@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+  // tampilan keranjang
   public function index()
   {
     $carts = Cart::where('user_id', Auth::user()->id)->get();
@@ -15,9 +16,12 @@ class CartController extends Controller
     return view('cart.index', compact('carts'));
   }
 
+
+  // menambahkan item ke keranjang
   public function addCart(Request $request)
   {
     $cart = new Cart();
+
     $cart->user_id = Auth::user()->id;
     $cart->product_id = $request->product_id;
     $cart->product_name = $request->product_name;
@@ -27,10 +31,20 @@ class CartController extends Controller
     return redirect('/dashboard');
   }
 
+
+  // hapus item di keranjang
+  public function destroy($id)
+  {
+    $cart = Cart::find($id);
+    $cart->delete();
+    return redirect('/cart');
+  }
+
+
+  // proses check out
   public function proces(int $id, Request $request)
   {
     $cart = Cart::where('id', $id)->first();
-    // $cart = Cart::find($id);
 
     if (!$cart) {
       $cart = new Cart();
@@ -69,25 +83,23 @@ class CartController extends Controller
     return redirect()->route('checkout', $cart->id);
   }
 
-  public function destroy($id)
-  {
-    $cart = Cart::find($id);
-    $cart->delete();
-    return redirect('/cart');
-  }
 
+  // halaman menunggu pembayaran
   public function checkout(Cart $cart, $id)
   {
     $cart = Cart::find($id);
     return view('cart.checkout', compact('cart'));
   }
 
+
+  // pembayaran sukses
   public function success(Cart $cart, $id)
   {
     $cart = Cart::where('id', $id)->first();
 
     $cart->status = 'success';
     $cart->save();
+
     return view('cart.success', compact('cart'));
   }
 }

@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('title', 'home')
 @section('container')
+
 <div class="row">
   <div class="col-md-12">
     <h1>Tooko</h1>
@@ -10,17 +11,26 @@
 
 <div class="col-md-12">
   <div class="row">
+
     @foreach ($products as $product)
       <div class="col-md-3 mb-3">
         <div class="card shadow" style="width: 18rem;">
+
+          {{-- Gambar Produk --}}
           <img src="{{ $product['image'] }}" class="card-img-top" alt="{{ $product['image'] }}">
           <div class="card-body">
+
+            {{-- produk detail --}}
             <h5 class="card-title">{{ $product['name'] }}</h5>
             <p class="card-text">{{ $product['description'] }}</p>
+
+            {{-- button --}}
             <div class="row">
+
               <div class="col-3">
                 <a href="{{ route('product', $product['id']) }}" class="btn btn-primary">Detail</a>
               </div>
+
               <div class="col-6">
                 <form action="{{ route('add-cart') }}" method="POST">
                   @csrf

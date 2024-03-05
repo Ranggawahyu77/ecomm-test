@@ -7,11 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+  // tampilan login
   public function index()
   {
     return view('auth.login');
   }
 
+
+  // validasi login
   public function authenticate(Request $request)
   {
     $credentials = $request->validate([
@@ -28,6 +31,8 @@ class LoginController extends Controller
     return back()->with('loginError', 'Login failed!');
   }
 
+
+  // logout
   public function logout()
   {
     Auth::logout();
