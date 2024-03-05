@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +13,7 @@ class HomeController extends Controller
     return view('home.index', compact('products'));
   }
 
-  public function show(int $id)
+  public function show(int $id, Cart $cart)
   {
     $products = config('products');
 
@@ -22,6 +23,6 @@ class HomeController extends Controller
       return abort(404);
     }
 
-    return view('home.product', compact('product'));
+    return view('home.product', compact('product', 'cart'));
   }
 }

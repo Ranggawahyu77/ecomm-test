@@ -14,10 +14,11 @@
           <p>Rp.{{ number_format($product['price'],0,".",".") }}</p>
           <div class="row">
             <div class="col-md-2">
-              <form action="" method="POST">
+              <form action="{{ route('checkout-proces', $product['id']) }}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{ $product['id'] }}">
                 <input type="hidden" name="product_id" value="{{ $product['id'] }}">
+                <input type="hidden" name="product_name" value="{{ $product['name'] }}">
                 <input type="hidden" name="price" value="{{ $product['price'] }}">
                 <button type="submit" class="btn btn-primary">Beli Sekarang</button>
               </form>

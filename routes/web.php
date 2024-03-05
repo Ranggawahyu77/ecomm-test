@@ -34,7 +34,11 @@ Route::middleware('auth')->group(function () {
   Route::get('/dashboard', [HomeController::class, "index"])->name("home");
   Route::get('/dashboard/product/{id}', [HomeController::class, "show"])->name("product");
 
-  Route::get('/cart', [CartController::class, "index"]);
-  Route::post('/cart', [CartController::class, "proces"])->name("add-cart");
+  Route::get('/cart', [CartController::class, "index"])->name('cart');
+  Route::post('/cart', [CartController::class, "addCart"])->name("add-cart");
   Route::delete('/cart/{id}', [CartController::class, "destroy"])->name("remove-cart");
+
+  Route::post('/checkout/{id}', [CartController::class, "proces"])->name('checkout-proces');
+  Route::get('/checkout/{id}', [CartController::class, "checkout"])->name('checkout');
+  Route::get('/checkout/success/{id}', [CartController::class, "success"])->name('checkout-succes');
 });

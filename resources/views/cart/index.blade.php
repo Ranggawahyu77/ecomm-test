@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Keranjang')
 @section('container')
+  <a href="{{ route('home') }}" class="btn btn-primary my-3">Kembali</a>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -9,13 +10,14 @@
         <th scope="col">Status</th>
         <th scope="col">Tanggal</th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       @forelse ($carts as $cart)
         <tr>
           <td>{{ $cart->product_name }}</td>
-          <td>{{ $cart->price }}</td>
+          <td>Rp{{ number_format($cart->price,0,".",".") }}</td>
           <td>
             @if ($cart->status == 'pending')
               <span class="badge bg-warning text-dark">{{ $cart->status }}</span>
@@ -26,17 +28,16 @@
             @endif
           </td>
           <td>{{ $cart->created_at }}</td>
-          <td class="row">
+          <td>
             @if ($cart->status == 'pending')
-              <form action="#" method="POST" class="col-3">
+              <form action="{{ route('checkout-proces', $cart->id) }}" method="POST">
                 @csrf
-                <input type="hidden" name="id" value="{{ $cart->id }}">
-                <input type="hidden" name="product_id" value="{{ $cart->product_id }}">
-                <input type="hidden" name="price" value="{{ $cart->price }}">
-                <button type="submit" class="btn btn-success">Bayar</button>
+                <button type="submit" class="btn btn-success">Check Out</button>
               </form>
             @endif
-            <form method="POST" action="{{ route('remove-cart', $cart->id) }}" class="col-3">
+          </td>
+          <td>
+            <form method="POST" action="{{ route('remove-cart', $cart->id) }}">
               @csrf
               @method('delete')
               <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Hapus</button>

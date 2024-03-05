@@ -20,7 +20,6 @@
             <div class="row">
               <div class="col-3">
                 <a href="{{ route('product', $product['id']) }}" class="btn btn-primary">Detail</a>
-
               </div>
               <div class="col-6">
                 <form action="{{ route('add-cart') }}" method="POST">
