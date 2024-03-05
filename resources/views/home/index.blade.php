@@ -12,13 +12,28 @@
   <div class="row">
     @foreach ($products as $product)
       <div class="col-md-3 mb-3">
-        <div class="card" style="width: 18rem;">
+        <div class="card shadow" style="width: 18rem;">
           <img src="{{ $product['image'] }}" class="card-img-top" alt="{{ $product['image'] }}">
           <div class="card-body">
             <h5 class="card-title">{{ $product['name'] }}</h5>
             <p class="card-text">{{ $product['description'] }}</p>
-            <a href="#" class="btn btn-primary">Detail</a>
-            <a href="#" class="btn btn-warning">+ Keranjang</a>
+            <div class="row">
+              <div class="col-3">
+                <a href="{{ route('product', $product['id']) }}" class="btn btn-primary">Detail</a>
+
+              </div>
+              <div class="col-6">
+                <form action="{{ route('add-cart') }}" method="POST">
+                  @csrf
+                  <input type="hidden" name="id" value="{{ $product['id'] }}">
+                  <input type="hidden" name="product_id" value="{{ $product['id'] }}">
+                  <input type="hidden" name="product_name" value="{{ $product['name'] }}">
+                  <input type="hidden" name="price" value="{{ $product['price'] }}">
+                  <button type="submit" class="btn btn-warning">+ Keranjang</button>
+                </form>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>

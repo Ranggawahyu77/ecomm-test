@@ -12,12 +12,16 @@ class HomeController extends Controller
     return view('home.index', compact('products'));
   }
 
-  public function show($id)
+  public function show(int $id)
   {
     $products = config('products');
 
     $product = collect($products)->firstWhere('id', $id);
 
-    return view('product', compact('product'));
+    if (!$product) {
+      return abort(404);
+    }
+
+    return view('home.product', compact('product'));
   }
 }

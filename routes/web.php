@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -29,6 +30,11 @@ Route::get('/register', [RegisterController::class, "index"])->middleware('guest
 Route::post('/register', [RegisterController::class, "store"]);
 
 Route::middleware('auth')->group(function () {
-  // dashboard
+  // dashboard product
   Route::get('/dashboard', [HomeController::class, "index"])->name("home");
+  Route::get('/dashboard/product/{id}', [HomeController::class, "show"])->name("product");
+
+  Route::get('/cart', [CartController::class, "index"]);
+  Route::post('/cart', [CartController::class, "proces"])->name("add-cart");
+  Route::delete('/cart/{id}', [CartController::class, "destroy"])->name("remove-cart");
 });
